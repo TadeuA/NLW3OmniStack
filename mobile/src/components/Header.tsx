@@ -10,29 +10,26 @@ interface HeaderProps {
   showCancel?: boolean
 }
 
-export default function Header({ title, showCancel = true }: HeaderProps) {
+export default function Header({title, showCancel = true}:HeaderProps) {
   const navigation = useNavigation();
 
-  // function navigateToHome() {
-  //   navigation.navigate('OrphanagesMap');
-  // }
+  function navigateToHome() {
+    navigation.navigate('OrphanagesMap');
+   }
 
   return (
     <View style={styles.container}>
       <BorderlessButton onPress={navigation.goBack}>
-        <Feather name="arrow-left" size={24} color="#15b6d6" />
+        <Feather name="arrow-left" size={24} color="#15B6D6"/>
       </BorderlessButton>
-
       <Text style={styles.title}>{title}</Text>
-
-      {showCancel ? (
-        <BorderlessButton onPress={() => navigation.navigate('OrphanagesMap')}>
-          <Feather name="x" size={24} color="#ff669d" />
-        </BorderlessButton>
-      ) : (
-        <View style={styles.cancelReplace}/>
-      )}
-
+     {showCancel?(
+        <BorderlessButton onPress={navigateToHome}>
+        <Feather name="x" size={24} color="#FF669D"/>
+      </BorderlessButton>
+     ):(
+       <View/>
+     )}
     </View>
   );
 }
@@ -40,9 +37,9 @@ export default function Header({ title, showCancel = true }: HeaderProps) {
 const styles = StyleSheet.create({
   container: {
     padding: 24,
-    backgroundColor: "#f9fafc",
+    backgroundColor: "#F9FaFc",
     borderBottomWidth: 1,
-    borderColor: '#dde3f0',
+    borderColor: '#DDE3F0',
     paddingTop: 44,
 
     flexDirection: 'row',
@@ -52,7 +49,7 @@ const styles = StyleSheet.create({
 
   title: {
     fontFamily: 'Nunito_600SemiBold',
-    color: '#8fa7b3',
+    color: '#8FA7B3',
     fontSize: 16
   },
 
