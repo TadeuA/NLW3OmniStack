@@ -2,35 +2,33 @@ import React from 'react';
 import {View, StyleSheet, Text, Image, Dimensions, SafeAreaView, Platform} from "react-native"
 import {useNavigation} from '@react-navigation/native'
 
-import WorldHappy from '../../images/happy-world.png'
+import kids from '../../images/kids.png'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
 
-export default function FirstOnboarding(){
+export default function SecondOnboarding(){
     const navigation = useNavigation();
 
-    function handleNavigationToSecondOnboarding() {
-        navigation.navigate('SecondOnboarding')
+    function handleNavigationToIntro(){
+        navigation.navigate('Intro')
     }
 
     return (
         <SafeAreaView style={styles.container}>
             
-            <Image style={styles.imageHappyWorld} source={WorldHappy}/>
+            <Image style={styles.imageHappyWorld} source={kids}/>
             <View style={styles.textContainer}>
-                <Text style={styles.textTitle}>Leve</Text>
-                <Text style={styles.textTitle}>felicidade</Text>
-                <Text style={styles.textTitle}>para o</Text>
-                <Text style={styles.textTitle}>mundo</Text>
-                <Text style={styles.textSimple}>Visite orfanatos e mude o</Text>
-                <Text style={styles.textSimple}>dia de muitas crianças.</Text>
+                <Text style={styles.textTitle}>Escolha um</Text>
+                <Text style={styles.textTitle}>orfanato no mapa</Text>
+                <Text style={styles.textTitle}>e faça uma visita</Text>
+               
             </View>
             <View style={styles.footer}>
                 <View style={styles.pagination}>
+                    <View style={[styles.backPage, styles.pageMarker]}/>
                     <View style={[styles.currentPage, styles.pageMarker]}/>
-                    <View style={[styles.nextPage, styles.pageMarker]}/>
                 </View>
-                <TouchableOpacity style={styles.nextButton} onPress={handleNavigationToSecondOnboarding}>
+                <TouchableOpacity style={styles.nextButton} onPress={handleNavigationToIntro}>
                     <Feather name='arrow-right' size={20} color='#FFF'/>
                 </TouchableOpacity>
             </View>
@@ -49,29 +47,24 @@ const styles = StyleSheet.create({
 
     },
     imageHappyWorld:{
-        height: 250,
-        width: 200
+        height: 256,
+        width: 175
     },  
     textContainer:{
         position: 'relative',
-        top: -60,
-        alignItems:"flex-start",
+        top: -40,
+        alignItems:"flex-end",
 
         width:Dimensions.get('window').width,
-        paddingHorizontal:50
+        paddingHorizontal:30
     },
     textTitle:{
         fontFamily: 'Nunito_800ExtraBold',
-        fontSize: 35,
+        fontSize: 30,
         flexDirection: 'column',
         color: '#0089A5',
     },
-    textSimple:{
-        fontFamily: 'Nunito_600SemiBold',
-        fontSize:18,
-        color: '#5C8599'
-
-    },
+    
     footer:{
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -98,7 +91,7 @@ const styles = StyleSheet.create({
         height:5,
         backgroundColor: '#FFD152'
     },
-    nextPage:{
+    backPage:{
         width:10,
         height:5,
         backgroundColor: '#BECFD8'

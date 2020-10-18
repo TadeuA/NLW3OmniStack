@@ -4,7 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import FirstOnboarding from './pages/Onboarding/FirstOnboarding'
+import SecondOnboarding from './pages/Onboarding/SecondOnboarding'
 
+import Intro from './pages/Intro';
 import OrphanagesMap from './pages/OrphanagesMap';
 import OrphanageDetails from './pages/OrphanageDetails';
 
@@ -31,6 +33,14 @@ export default function Routes() {
           component={FirstOnboarding} 
         />
 
+        <Screen 
+          name="SecondOnboarding" 
+          component={SecondOnboarding} 
+        />
+        <Screen 
+          name="Intro" 
+          component={Intro} 
+        />
         <Screen 
           name="OrphanagesMap" 
           component={OrphanagesMap} 
