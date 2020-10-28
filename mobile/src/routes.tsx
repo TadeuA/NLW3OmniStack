@@ -3,8 +3,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import FirstOnboarding from './pages/Onboarding/FirstOnboarding'
-import SecondOnboarding from './pages/Onboarding/SecondOnboarding'
+import Onboarding from './pages/Onboarding'
 
 import Intro from './pages/Intro';
 import OrphanagesMap from './pages/OrphanagesMap';
@@ -12,6 +11,12 @@ import OrphanageDetails from './pages/OrphanageDetails';
 
 import SelectMapPosition from './pages/CreateOrphanage/SelectMapPosition';
 import OrphanageData from './pages/CreateOrphanage/OrphanageData';
+import OrphanageInstructions from './pages/CreateOrphanage/OrphanageInstructions';
+import Subscribe from './pages/CreateOrphanage/Subscribe';
+import Unsubscribe from './pages/CreateOrphanage/Unsubscribe';
+
+
+
 
 import Header from './components/Header';
 
@@ -29,18 +34,16 @@ export default function Routes() {
           }}
       >
         <Screen 
-          name="FirstOnboarding" 
-          component={FirstOnboarding} 
+          name="Onboarding" 
+          component={Onboarding} 
         />
 
-        <Screen 
-          name="SecondOnboarding" 
-          component={SecondOnboarding} 
-        />
+       
         <Screen 
           name="Intro" 
           component={Intro} 
         />
+        
         <Screen 
           name="OrphanagesMap" 
           component={OrphanagesMap} 
@@ -73,6 +76,22 @@ export default function Routes() {
           }}
         />
        
+       <Screen 
+          name="OrphanageInstructions" 
+          component={OrphanageInstructions}
+          options={{
+            headerShown:true,
+            header:()=><Header title="Informe os dados"/>
+          }}
+        />
+         <Screen 
+          name="Subscribe" 
+          component={Subscribe} 
+        />
+          <Screen 
+          name="Unsubscribe" 
+          component={Unsubscribe} 
+        />
       </Navigator>
     </NavigationContainer>
   )

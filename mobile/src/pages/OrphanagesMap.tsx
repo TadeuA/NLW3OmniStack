@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import { Alert, Dimensions, StyleSheet, Text, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation, useFocusEffect, useRoute } from '@react-navigation/native';
 import {  RectButton } from 'react-native-gesture-handler';
 
 import mapMarker from '../images/map-marker.png';
@@ -16,15 +16,25 @@ interface Orphanages {
   longitude: number,
 }
 
+interface UserPosition{
+  latitude:number;
+  longitude:number;
+}
+
 export default function OrphanagesMap() {
   const navigation = useNavigation();
+  const route = useRoute()
   const [ orphanages, setOrphanages] = useState<Orphanages[]>([])
+  const {latitude, longitude} = route.params as UserPosition
+
+
   useFocusEffect(()=>{
     api.get('orphanages').then(response => {
       setOrphanages(response.data)
     })
   },)
-
+  
+ 
 
   function NavigateToOrphanageDetails(id: number){
     navigation.navigate('OrphanageDetails', {id});
@@ -41,8 +51,8 @@ export default function OrphanagesMap() {
         provider={PROVIDER_GOOGLE}
         style={styles.map}
         initialRegion={{
-          latitude: -22.5126683,
-          longitude: -43.2044011,
+          latitude:latitude,
+          longitude: longitude,
           latitudeDelta: 0.05,
           longitudeDelta: 0.05
         }}

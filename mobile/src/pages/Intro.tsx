@@ -1,21 +1,36 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Alert} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
+import {getCurrentPositionAsync, requestPermissionsAsync} from 'expo-location';
 
 export default function Intro() {
     const [blinkEye, setBlinkEye ] = useState(21)
     const navigation = useNavigation()
     useEffect(() =>{
-        setTimeout(()=>{ 
-            setBlinkEye(3),
-            setTimeout(()=>{ setBlinkEye(21)},500)
-            setTimeout(()=>{ navigation.navigate('OrphanagesMap')},1000)
-        },2000)
-
         
-       
+        async function loadPosition() {
+          const { granted } = await requestPermissionsAsync();
 
+          if (!granted) {
+            Alert.alert('Oooops...', 'Precisamos de sua permissão para obter a localização');
+            return;
+          }
+
+          const {coords} = await getCurrentPositionAsync({
+            accuracy:4
+          });
+
+          const { latitude, longitude } = coords;
+
+            setTimeout(()=>{ 
+                setBlinkEye(3),
+                setTimeout(()=>{ setBlinkEye(21)},500)
+                setTimeout(()=>{ navigation.navigate('OrphanagesMap',{latitude,longitude})},1000)
+            },2000)
+        }
+
+        loadPosition()
     },[])
     return (
         <LinearGradient 

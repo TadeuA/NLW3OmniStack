@@ -36,6 +36,11 @@ export class createOrphanages1602623425501 implements MigrationInterface
 
         },
         {
+          name: "whatsapp",
+          type:"integer",
+
+        },
+        {
           name: "instructions",
           type:"text",
           
@@ -46,6 +51,12 @@ export class createOrphanages1602623425501 implements MigrationInterface
         },
         {
           name: "open_on_weekends",
+          type:"boolean",
+          default:false
+          
+        },
+        {
+          name: "approved",
           type:"boolean",
           default:false
           

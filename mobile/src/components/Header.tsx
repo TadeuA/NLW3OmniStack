@@ -14,7 +14,8 @@ export default function Header({title, showCancel = true}:HeaderProps) {
   const navigation = useNavigation();
 
   function navigateToHome() {
-    navigation.navigate('OrphanagesMap');
+    
+    navigation.navigate('Unsubscribe');
    }
 
   return (
