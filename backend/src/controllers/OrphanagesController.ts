@@ -7,12 +7,22 @@ import * as Yup from "yup"
 export default{
     async index(request: Request, response: Response){
         const orphanagesRepository = getRepository(Orphanage);
+        const {approved = true} = request.body
 
-        const orphanages = await orphanagesRepository.find({
-            relations: ["images"]
-        })
+        let orphanages;
 
+        if(approved === "all"){
+            orphanages = await orphanagesRepository.find({
+                relations: ["images"]
+            })
+        }else{
+            orphanages = await orphanagesRepository.find({
+                relations: ["images"],
+                where:{approved:approved}
+            })
+        }
         
+       
         return response.json(orphanageView.renderMany(orphanages));
         
     },
@@ -41,7 +51,8 @@ export default{
             instructions,
             opening_hours,
             open_on_weekends,
-            whatsapp
+            whatsapp,
+            approved = false,
         } = request.body
     
         const orphanagesRepository = getRepository(Orphanage);
@@ -61,7 +72,7 @@ export default{
             opening_hours,
             open_on_weekends : open_on_weekends === "true",
             images,
-            approved : true
+            approved
         }
 
         const schema = Yup.object().shape({
